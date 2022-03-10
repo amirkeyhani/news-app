@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+.poppins-font{
+	font-family: 'Poppins', sans-serif;
+}
+
+body{
+
+	background-color: #26001b;
+}
+nav {
+
+	background-color:#810034;
+}
+
+nav h3{
+
+	font-family: 'Baloo Bhai 2', cursive;
+}
+
+.banner{
+	margin-top: 150px;
+}
+
+.news a{
+
+	background-color:#810034;
+	text-decoration: none;
+	color: white
+
+}
+
+.news a:hover{
+
+	transition: 1s;
+	background-color: #fff600;
+	color: black;
+}
+
+.pagi a{
+
+	background-color:#810034;
+	text-decoration: none;
+	color: white
+
+}
+
+.footer {
+	background-color:#810034;
+}
+
+.headlines h1{
+	color: #810034;
+}
+
+.headlines a{
+	background-color:#810034;
+	text-decoration: none;
+	color: white
+}
+.headlines a:hover{
+
+	transition: 1s;
+	background-color: #fff600;
+	color: black;
+}

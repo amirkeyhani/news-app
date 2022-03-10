@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>News</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+
+  </head>
+<body>
+    
+    <!-- Nav part -->
+  <nav class="navbar shadow-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/news/">
+        <img src="{% static 'images/logo1.png' %}" width="150px;">
+      </a>
+    </div>
+  </nav>
+
+  <div class="container text-center banner">
+    <img src="{% static 'images/logo1.png' %}" class="shadow-lg">
+    <hr style="color: white;">
+  </div>   
+
+  {% for author, title, description, url, image, publishAt in news %}
+
+    <div class="container mt-5 news shadow-lg p-5">
+      <div class="text-center">
+        <img src="{{image}}" class="img-fluid">
+      </div>
+      <br>
+      <span class="text-white poppins-font"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </svg> By {{author}}</span> 
+      <span class="text-muted px-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+        <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+        </svg> {{publishAt}} </span> <hr style="color: white;">
+      <p class="poppins-font text-white">
+        {{description}}
+      </p>
+      <br>
+      <a href="{{url}}" class="poppins-font shadow-lg p-2"> <b>Read more</b></a>
+    </div>
+  {% endfor %}
+
+<!-- pagination -->
+  <div class="text-center container pagi shadow-lg p-3 my-5">
+    {% if news.has_previous %}
+      <a class="poppins-font p-2" href="?page={{news.previous_page_number}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+      <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+      </svg> previous</a>
+    {% endif %}
+
+    <a class="p-2 active-btn poppins-font text-dark" style="background-color: #fff600;">{{news.number}}</a>
+
+    {% if news.has_next %}
+      <a class="p-2 poppins-font" href="?page={{news.next_page_number}}">next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+      <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+      </svg></a>
+    {% endif %}
+  <!-- end pagination -->
+  </div>
+
+  <br><br>
+
+<!-- top headlines -->
+
+  <div class="container headlines my-5">
+    <h1 class="poppins-font"><b>Top Headlines</b></h1><hr style="color: white;">
+    <div class="row">
+      {% for headline_author, headline_title, headline_description, headline_url, headline_image,headline_publishAt in headline %}
+        <div class="col-sm-4 shadow-lg p-5 border-top-0">
+          <img src="{{headline_image}}" class="img-fluid">
+          <small class="text-white poppins-font"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg> By  {{headline_author}}</small><br><br> 
+          <small class="text-muted px-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+          <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg> {{headline_publishAt}} </small> <hr style="color: white;">
+          <p class="poppins-font text-white">
+            {{headline_description}}
+          </p>
+          <hr style="color: white;">
+          <a href="{{headline_url}}" class="poppins-font shadow-lg p-2"> <b>Read more</b></a>
+        </div>
+      {% endfor %}  
+    </div>  
+  </div>
+<!-- end top headlines -->
+
+<!-- footer -->
+  <div class="container-fluid mt-5 footer shadow-lg text-center p-3">
+    <span class="text-white poppins-font"><b>&copy;copyright 2021</b></span>
+    <img class="mx-3" src="{% static 'images/logo1.png' %}" width="100px;">
+  </div>
+
+<!-- end footer -->
+  </body>
+</html>
